@@ -1,0 +1,82 @@
+# примеры API-запросов
+# admin_token = 61da64e0c2c82549bfeb463e142b7879c50e0afc
+# golovin_token = 6efb8941e4db8aaebf4636a6b81d4ed5286b9993
+
+@baseUrl = http://127.0.0.1:8000/api
+
+###
+GET {{baseUrl}}/news/
+Content-Type: application/json 
+
+###
+POST {{baseUrl}}/news/
+Content-Type: application/json
+Authorization: Token 6efb8941e4db8aaebf4636a6b81d4ed5286b9993
+
+{
+  "title": "About a bear",
+  "text": "We feed our bear"
+}
+
+###
+
+POST {{baseUrl}}/news/
+Content-Type: application/json
+Authorization: Token 6efb8941e4db8aaebf4636a6b81d4ed5286b9993
+
+{
+  "title": "About a bear",
+  "text": "We feed our bear",
+  "likes": 
+}
+
+###
+PUT {{baseUrl}}/news/8/
+Content-Type: application/json
+Authorization: Token 6efb8941e4db8aaebf4636a6b81d4ed5286b9993
+
+{
+  "title": "About a BEAR",
+  "text": "We feed our BEAR"
+}
+
+###
+DELETE {{baseUrl}}/news/7/
+Content-Type: application/json
+Authorization: Token 61da64e0c2c82549bfeb463e142b7879c50e0afc
+
+###
+GET {{baseUrl}}/comment/
+Content-Type: application/json 
+
+###
+POST {{baseUrl}}/comment/
+Content-Type: application/json
+Authorization: Token 6efb8941e4db8aaebf4636a6b81d4ed5286b9993
+
+{   
+    "text": "golovin's comment",
+    "news": 1
+}
+
+###
+
+DELETE {{baseUrl}}/comment/5/
+Content-Type: application/json
+Authorization: Token 6efb8941e4db8aaebf4636a6b81d4ed5286b9993
+
+###
+
+POST {{baseUrl}}/like/
+Content-Type: application/json
+Authorization: Token 6efb8941e4db8aaebf4636a6b81d4ed5286b9993
+
+{
+  "news": 1
+}
+
+###
+
+DELETE {{baseUrl}}/like/1/
+Content-Type: application/json
+Authorization: Token 6efb8941e4db8aaebf4636a6b81d4ed5286b9993
