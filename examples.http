@@ -5,21 +5,24 @@
 @baseUrl = http://127.0.0.1:8000/api
 
 ###
+# получаем список всех новостей
 GET {{baseUrl}}/news/
 Content-Type: application/json 
 
 ###
+# создаем новость админом(не пользователем)
 POST {{baseUrl}}/news/
 Content-Type: application/json
-Authorization: Token 6efb8941e4db8aaebf4636a6b81d4ed5286b9993
+Authorization: Token 61da64e0c2c82549bfeb463e142b7879c50e0afc
 
 {
-  "title": "About a bear",
-  "text": "We feed our bear"
+  "title": "About a lion",
+  "text": "We feed our lion",
+  "likes": [1]
 }
 
 ###
-
+# создаем новость пользователем(не адимном)
 POST {{baseUrl}}/news/
 Content-Type: application/json
 Authorization: Token 6efb8941e4db8aaebf4636a6b81d4ed5286b9993
@@ -27,11 +30,25 @@ Authorization: Token 6efb8941e4db8aaebf4636a6b81d4ed5286b9993
 {
   "title": "About a bear",
   "text": "We feed our bear",
-  "likes": 
+  "likes": [1]
 }
 
 ###
-PUT {{baseUrl}}/news/8/
+# меняем новость пользователя от имени админа
+PUT {{baseUrl}}/news/4/
+Content-Type: application/json
+Authorization: Token 61da64e0c2c82549bfeb463e142b7879c50e0afc
+
+{
+  "title": "About a BEAR",
+  "text": "We feed our BEAR",
+  "likes": [1]
+}
+
+###
+
+# пробуем меняем новость админа от имени пользователя
+PUT {{baseUrl}}/news/1/
 Content-Type: application/json
 Authorization: Token 6efb8941e4db8aaebf4636a6b81d4ed5286b9993
 
@@ -41,32 +58,72 @@ Authorization: Token 6efb8941e4db8aaebf4636a6b81d4ed5286b9993
 }
 
 ###
-DELETE {{baseUrl}}/news/7/
+
+###
+# удаляем новость пользователя от имени админа
+DELETE {{baseUrl}}/news/11/
 Content-Type: application/json
 Authorization: Token 61da64e0c2c82549bfeb463e142b7879c50e0afc
 
+{
+  "title": "About a BEAR",
+  "text": "We feed our BEAR",
+  "likes": [1]
+}
+
 ###
+
+# пробуем удалить новость админа от имени пользователя
+DELETE {{baseUrl}}/news/1/
+Content-Type: application/json
+Authorization: Token 6efb8941e4db8aaebf4636a6b81d4ed5286b9993
+
+{
+  "title": "About a BEAR",
+  "text": "We feed our BEAR"
+}
+
+###
+# получаем список всех комментов
 GET {{baseUrl}}/comment/
 Content-Type: application/json 
 
 ###
+# создаем коммент от имени пользователя
 POST {{baseUrl}}/comment/
 Content-Type: application/json
 Authorization: Token 6efb8941e4db8aaebf4636a6b81d4ed5286b9993
 
 {   
     "text": "golovin's comment",
-    "news": 1
+    "news": 2
 }
 
 ###
+# создаем коммент от имени админа
+POST {{baseUrl}}/comment/
+Content-Type: application/json
+Authorization: Token 61da64e0c2c82549bfeb463e142b7879c50e0afc
 
-DELETE {{baseUrl}}/comment/5/
+{   
+    "text": "admin's comment",
+    "news": 2
+}
+
+###
+# пробуем удалить коммент админа от имени пользователя
+DELETE {{baseUrl}}/comment/7/
 Content-Type: application/json
 Authorization: Token 6efb8941e4db8aaebf4636a6b81d4ed5286b9993
 
 ###
+#  удаляем коммент пользователя от имени админа
+DELETE {{baseUrl}}/comment/4/
+Content-Type: application/json
+Authorization: Token 6efb8941e4db8aaebf4636a6b81d4ed5286b9993
 
+###
+# создаем лайк
 POST {{baseUrl}}/like/
 Content-Type: application/json
 Authorization: Token 6efb8941e4db8aaebf4636a6b81d4ed5286b9993
@@ -76,7 +133,7 @@ Authorization: Token 6efb8941e4db8aaebf4636a6b81d4ed5286b9993
 }
 
 ###
-
+# удаляем лайк
 DELETE {{baseUrl}}/like/1/
 Content-Type: application/json
 Authorization: Token 6efb8941e4db8aaebf4636a6b81d4ed5286b9993
